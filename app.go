@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"G-Torrent/internal/bin"
 	"G-Torrent/internal/ffmpeg"
@@ -56,8 +57,10 @@ func (a *App) DownloadAndTrim(url string, startSec, endSec float64, outputPath s
 // .mp3 filename derived from the video title. Returns "" if the user
 // cancelled the dialog.
 func (a *App) PickOutputPath(suggestedName string) (string, error) {
+	home, _ := os.UserHomeDir()
 	return wruntime.SaveFileDialog(a.ctx, wruntime.SaveDialogOptions{
-		DefaultFilename: paths.Sanitise(suggestedName) + ".mp3",
+		DefaultDirectory: home,
+		DefaultFilename:  paths.Sanitise(suggestedName) + ".mp3",
 		Filters: []wruntime.FileFilter{
 			{DisplayName: "MP3 Audio (*.mp3)", Pattern: "*.mp3"},
 		},
