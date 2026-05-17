@@ -29,5 +29,3 @@ Grab **G-Torrent.zip** from the Assets below. Unzip anywhere (Desktop, Downloads
 
 - Some videos won't download: age-restricted, region-locked, livestreams, certain music videos. These are kkdai-side limitations — you'll see a readable error rather than a crash.
 - YouTube occasionally changes their player and breaks the downloader. If that happens, ping me and I'll push a new build.
-
-## Built with
