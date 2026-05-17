@@ -1,0 +1,22 @@
+build/bin
+node_modules
+frontend/dist
+
+# Bundled ffmpeg payload (download via scripts/fetch-ffmpeg.sh)
+internal/bin/payload/*.exe
+
+# Wails-generated checksum (regenerated on every build)
+frontend/package.json.md5
+
+# IDE
+.vscode/
+.idea/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Local Go build artefacts
+*.exe
+*.test
+*.out
