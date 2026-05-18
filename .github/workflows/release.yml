@@ -36,6 +36,14 @@ jobs:
       - name: Install Wails CLI
         run: go install github.com/wailsapp/wails/v2/cmd/wails@v2.12.0
 
+      - name: Download bundled ffmpeg.exe
+        shell: bash
+        run: |
+          mkdir -p internal/bin/payload
+          curl -L -o ffmpeg.zip https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip
+          unzip -j ffmpeg.zip 'ffmpeg-*/bin/ffmpeg.exe' -d internal/bin/payload/
+          rm ffmpeg.zip
+
       - name: Build .exe
         run: wails build -platform windows/amd64
 

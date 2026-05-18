@@ -1,8 +1,22 @@
+//go:build windows
+
 package bin
 
-import _ "embed"
+import (
+	"crypto/sha256"
+	_ "embed"
+	"encoding/hex"
+)
 
 //go:embed payload/ffmpeg.exe
 var ffmpegBinary []byte
 
-const ffmpegSHA256 = "228d7a8556258de907fdb55f36850078ebc7680b84ec30d84ea02e99bec1d1eb"
+// ffmpegSHA256 is computed once at startup from the embedded bytes,
+// so it always matches whatever ffmpeg.exe was bundled at build time
+// (CI downloads a fresh copy each build).
+var ffmpegSHA256 string
+
+func init() {
+	sum := sha256.Sum256(ffmpegBinary)
+	ffmpegSHA256 = hex.EncodeToString(sum[:])
+}
