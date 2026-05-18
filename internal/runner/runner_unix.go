@@ -1,4 +1,4 @@
-//go:build linux
+//go:build linux || darwin
 
 package runner
 
@@ -7,7 +7,7 @@ import (
 	"os/exec"
 )
 
-// Command builds an exec.Cmd. Linux has no console-window concern;
+// Command builds an exec.Cmd. Linux and macOS have no console-window concern;
 // the OS-split exists purely for the Windows variant's sake.
 func Command(ctx context.Context, name string, args ...string) *exec.Cmd {
 	return exec.CommandContext(ctx, name, args...)

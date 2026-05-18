@@ -12,11 +12,12 @@ import (
 )
 
 // EnsureFfmpeg returns a path to a runnable ffmpeg binary.
-// On Linux it returns "ffmpeg" (resolved from $PATH at exec time).
+// On Linux and macOS it returns "ffmpeg" (resolved from $PATH at exec time —
+// users are expected to install ffmpeg via the system package manager).
 // On Windows it extracts the embedded binary to %LOCALAPPDATA% and
 // re-uses it on subsequent runs, hash-checked against ffmpegSHA256.
 func EnsureFfmpeg(_ context.Context) (string, error) {
-	if runtime.GOOS == "linux" {
+	if runtime.GOOS == "linux" || runtime.GOOS == "darwin" {
 		return "ffmpeg", nil
 	}
 
